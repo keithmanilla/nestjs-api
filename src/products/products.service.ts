@@ -4,11 +4,12 @@ import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
+  create(createProductDto: CreateProductDto[]) {
     return {
       statusCode: 201,
-      message: 'Successfully created product',
-      product: createProductDto,
+      message: `Successfully created product${createProductDto?.length > 1 ? 's' : ''}`,
+      count: createProductDto?.length,
+      products: createProductDto,
     };
   }
 
@@ -21,7 +22,7 @@ export class ProductsService {
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return `This action updates a #${id} product: ${updateProductDto?.toString()}`;
   }
 
   remove(id: number) {
